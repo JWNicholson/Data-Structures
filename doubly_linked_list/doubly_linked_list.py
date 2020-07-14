@@ -1,9 +1,8 @@
-import math
 """
 Each ListNode holds a reference to its previous node
 as well as its next node in the List.
 """
-
+import math
 
 class ListNode:
     def __init__(self, value, prev=None, next=None):
@@ -42,7 +41,6 @@ class DoublyLinkedList:
             prev = self.head
             self.head = ListNode(value, None, prev)
             prev.prev = self.head
-
         self.length += 1
 
     """
@@ -61,11 +59,13 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
+        #empty
         if self.tail is None:
             self.tail = ListNode(value)
             self.head = self.tail
         else:
-            prev = self.tail
+            #not empty
+            prev = self.tail # set previous
             self.tail = ListNode(value, prev)
             prev.next = self.tail
         self.length += 1
@@ -76,31 +76,64 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_tail(self):
-        pass
+        old_node = self.tail.value
+        self.delete(self.tail)
+        return old_node
 
     """
     Removes the input node from its current spot in the
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        pass
+        self.delete(node)
+        self.add_to_head(node.value)
 
     """
     Removes the input node from its current spot in the
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
-        pass
+        self.delete(node)
+        self.add_to_tail(node.value)
 
     """
     Deletes the input node from the List, preserving the
     order of the other elements of the List.
     """
     def delete(self, node):
-        pass
+        if node == self.head:
+            #empty 
+            if self.head.next is None:
+                self.head = None
+                self.tail = None
+
+            else:
+                # not empty
+                self.head = self.head.next
+                self.head.prev = None
+        elif node == self.tail:
+            if self.tail.prev is None:
+                self.head = None
+                self.prev = None
+            else:
+                self.tail = self.tail.prev
+                self.tail.next = None
+
+        else:
+            node.prev.next = node.next
+            node.next.prev = node.prev
+        self.length -= 1
+
     """
     Finds and returns the maximum value of all the nodes
     in the List.
     """
     def get_max(self):
-        pass
+        current = self.head
+        max = -math.inf## dont for the - for negative infinity
+
+        while current is not None:
+            if current.value > max:
+                max = current.value
+            current = current.next
+        return max
