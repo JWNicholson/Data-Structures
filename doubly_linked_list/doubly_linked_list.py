@@ -43,6 +43,7 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         #create an instance of ListNode() with value
         new_node = ListNode(value, None, self.head)
+        #store value of head in current var
         current = self.head
         #Empty
         if not current:
@@ -58,9 +59,11 @@ class DoublyLinkedList:
     """
 
     def remove_from_head(self):
+        #store value of head in current var
         current = self.head
         if not current:
             return None
+        #point to prev node
         elif not current.prev:
             result = self.head
             self.head = self.head.next
@@ -78,11 +81,15 @@ class DoublyLinkedList:
     """
 
     def add_to_tail(self, value):
+        #create an instance of ListNode() with value
         new_node = ListNode(value, self.tail)
+        #store value of head in current var
         current = self.head
+         #Empty
         if not current:
             self.head = new_node
             self.tail = new_node
+        # not empty    
         else:
             self.tail.next = new_node
             self.tail = new_node
@@ -94,14 +101,23 @@ class DoublyLinkedList:
     """
 
     def remove_from_tail(self):
-        pass
+        #store value of head in current var
+        current = self.tail
+        if not current:
+            return None
+        elif not current.prev:
+            result = self.head
+            self.head = self.head.next
+            self.tail = self.tail.prev
+            return result.value
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List.
     """
 
     def move_to_front(self, node):
-        pass
+        self.delete(node)
+        self.add_to_head(node.value)
 
     """
     Removes the input node from its current spot in the 
