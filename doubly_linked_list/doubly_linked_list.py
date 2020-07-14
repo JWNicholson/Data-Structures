@@ -41,17 +41,26 @@ class DoublyLinkedList:
     """
 
     def add_to_head(self, value):
-        #create an instance of ListNode() with value
         new_node = ListNode(value, None, self.head)
-        #store value of head in current var
-        current = self.head
-        #Empty
-        if not current:
+        # if the list is empty
+        if not self.head and not self.tail: 
             self.head = new_node
             self.tail = new_node
-        else:
-            # not empty
+        else: 
+            new_node.next = self.head
+            self.head.prev = new_node
             self.head = new_node
+        # #create an instance of ListNode() with value
+        # new_node = ListNode(value, None, self.head)
+        # #store value of head in current var
+        # current = self.head
+        # #Empty
+        # if not current:
+        #     self.head = new_node
+        #     self.tail = new_node
+        # else:
+        #     # not empty
+        #     self.head = new_node
     """
     Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -116,8 +125,7 @@ class DoublyLinkedList:
     """
 
     def move_to_front(self, node):
-        self.delete(node)
-        self.add_to_head(node.value)
+        pass
 
     """
     Removes the input node from its current spot in the 
