@@ -73,8 +73,18 @@ class BSTNode:
             return self.value
 
     # Call the function `fn` on the value of each node
+
+    # set value of fn
+    # check if left node exists and call fn of each self on left nodes
+    #do same for right
     def for_each(self, fn):
-        pass
+        fn(self.value)
+
+        if self.left:
+            self.left.for_each(fn)
+
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
