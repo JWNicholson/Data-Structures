@@ -142,8 +142,22 @@ class BSTNode:
         
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
+    # https://docs.python.org/3/library/queue.html?highlight=lifoque#queue.LifoQueue -- Last In First Out
     def dft_print(self, node):
-        pass
+        q_nodes = queue.LifoQueue()
+        q_nodes.put(node)
+
+        while not q_nodes.empty():
+            current_node = q_nodes.get()
+            print(current_node.value)
+
+            if current_node.right:
+                q_nodes.put(current_node.right)
+                
+            if current_node.left:
+                q_nodes.put(current_node.left)
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
