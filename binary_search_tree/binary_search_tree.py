@@ -125,12 +125,21 @@ class BSTNode:
     # enqueue the children of the current into the queue
 
     def bft_print(self, node):
-        q = queue.Queue(0)
-        q.put(node)
+        q_nodes = queue.Queue(0)# https://docs.python.org/3/library/queue.html
+        q_nodes.put(node)
+
+        # empty() returns true if queue is empty
+        while not q_nodes.empty(): #(while not True)
+            current_nodes = q_nodes.get()
+            print(current_nodes.value)
+
+            if current_nodes.left:
+                q_nodes.put(current_nodes.left)
+
+            if current_nodes.right:
+                q_nodes.put(current_nodes.right)
 
         
-        
-
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
